@@ -1,0 +1,9 @@
+# SCL Consultores - robots.txt
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://sclconsultores.com/sitemap.xml
+
+# Disallow admin and API routes
+Disallow: /api/
