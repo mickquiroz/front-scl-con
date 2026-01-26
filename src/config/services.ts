@@ -1,16 +1,21 @@
 export interface ServiceStat {
     value: string;
     label: string;
+    sublabel?: string;
 }
 
 export interface ServiceHighlight {
     title: string;
     description: string;
+    useCase?: string;
+    badge?: string;
 }
 
 export interface ServiceProcessStep {
     title: string;
     description: string;
+    deliverables?: string;
+    duration?: string;
 }
 
 export interface ServiceHero {
@@ -18,6 +23,30 @@ export interface ServiceHero {
     subheadline: string;
     ctaPrimary: string;
     ctaSecondary?: string;
+    ctaPrimaryHref?: string;
+    ctaSecondaryHref?: string;
+    targetAudience?: string;
+}
+
+export interface ServiceCaseStudy {
+    industry: string;
+    title: string;
+    result: string;
+    description: string;
+}
+
+export interface ServiceTestimonial {
+    quote: string;
+    author: string;
+    role: string;
+    company?: string;
+}
+
+export interface ServiceSocialProof {
+    headline: string;
+    cases: ServiceCaseStudy[];
+    testimonial?: ServiceTestimonial;
+    logos?: string[]; // URLs strings or just placeholders for now
 }
 
 export interface Service {
@@ -29,6 +58,7 @@ export interface Service {
     stats: ServiceStat[];
     highlights: ServiceHighlight[];
     process: ServiceProcessStep[];
+    socialProof?: ServiceSocialProof;
 }
 
 export const countriesPresence = [
@@ -55,6 +85,8 @@ export const services: Service[] = [
             subheadline: "Maximizamos el valor de su inversión SAP con soluciones a medida y consultoría experta.",
             ctaPrimary: "Contáctanos",
             ctaSecondary: "Ver Casos de Éxito",
+            ctaPrimaryHref: "/contact",
+            ctaSecondaryHref: "#cta",
         },
         stats: [
             { value: "15+", label: "Años de Experiencia" },
@@ -104,51 +136,99 @@ export const services: Service[] = [
         slug: "hyperautomation",
         shortDescription: "Automatización inteligente de procesos con RPA y tecnologías avanzadas.",
         hero: {
-            headline: "Reduzca Costos y Acelere Operaciones con Automatización",
-            subheadline: "500+ proyectos · 100+ bots en soporte · 80+ entregas exitosas. Libere el potencial de su equipo delegando tareas repetitivas a nuestra fuerza de trabajo digital.",
+            headline: "Automatización Inteligente que Reduce Costos hasta 70%",
+            subheadline: "Transforme procesos manuales en flujos automatizados con RPA e IA. Mejore velocidad, precisión y cumplimiento mientras libera a su equipo para tareas de mayor valor. 500+ proyectos | 100+ bots en soporte | 80+ entregas exitosas",
             ctaPrimary: "Solicitar Diagnóstico",
-            ctaSecondary: "Hablar con Especialista",
+            ctaSecondary: "Calcular ROI",
+            ctaPrimaryHref: "#cta",
+            ctaSecondaryHref: "#roi-calculator",
+            targetAudience: "Finanzas • Operaciones • RR.HH. • Logística"
         },
         stats: [
-            { value: "500+", label: "Proyectos" },
-            { value: "100+", label: "Bots en soporte" },
-            { value: "80+", label: "Entregas exitosas" },
+            { value: "500+", label: "Proyectos", sublabel: "en LATAM + USA" },
+            { value: "100+", label: "Bots en soporte", sublabel: "SLA y monitoreo" },
+            { value: "80+", label: "Entregas exitosas", sublabel: "en producción" },
+            { value: "2-6 sem", label: "Time-to-value", sublabel: "Implementación ágil" }
         ],
         highlights: [
             {
                 title: "RPA Avanzado",
-                description: "Robots software que automatizan tareas repetitivas con alta precisión.",
+                description: "Robots software que automatizan tareas repetitivas con alta precisión, reduciendo errores y tiempos de ejecución.",
+                useCase: "Conciliaciones, facturación, reporting",
+                badge: "Top Demand"
             },
             {
                 title: "Integración Cognitiva",
-                description: "Uso de IA para procesamiento de documentos y toma de decisiones.",
+                description: "Uso de IA para procesamiento de documentos, clasificación automática y validación de datos complejos.",
+                useCase: "Clasificación + validación automática",
+                badge: "AI-Ready"
             },
             {
                 title: "Process Mining",
-                description: "Análisis profundo de procesos para identificar cuellos de botella.",
+                description: "Análisis profundo de trazas digitales para detectar cuellos de botella y optimizar flujos reales.",
+                useCase: "Detecta cuellos de botella",
+                badge: "Discovery"
             },
             {
                 title: "Chatbots & Asistentes",
-                description: "Interfaces conversacionales inteligentes para atención al cliente.",
+                description: "Interfaces conversacionales inteligentes que resuelven consultas frecuentes y ejecutan transacciones.",
+                useCase: "Mesa de ayuda / atención",
+                badge: "24/7"
             }
         ],
         process: [
             {
                 title: "Discovery",
-                description: "Identificación y priorización de oportunidades de automatización.",
+                description: "Identificación y priorización de oportunidades con análisis de viabilidad técnica y económica.",
+                deliverables: "Lista priorizada + business case",
+                duration: "1–2 semanas"
             },
             {
                 title: "Diseño y Prototipado",
-                description: "Creación de la arquitectura de la solución y validación rápida.",
+                description: "Definición de arquitectura, validación de reglas de negocio y creación de prueba de concepto.",
+                deliverables: "PoC validada",
+                duration: "1–2 semanas"
             },
             {
                 title: "Desarrollo",
-                description: "Construcción de bots y agentes con mejores prácticas.",
+                description: "Construcción de bots robustos, integración con sistemas y pruebas exhaustivas (UAT).",
+                deliverables: "Bots listos + QA",
+                duration: "2–4 semanas"
             },
             {
                 title: "Despliegue y Monitoreo",
-                description: "Puesta en producción y orquestación centralizada.",
+                description: "Puesta en producción controlada, gestión del cambio y soporte continuo con SLA.",
+                deliverables: "Orquestación + soporte",
+                duration: "Ongoing"
             }
-        ]
+        ],
+        socialProof: {
+            headline: "Resultados Reales en Producción",
+            cases: [
+                {
+                    industry: "Retail / Logística",
+                    title: "Optimización de Inventario",
+                    result: "Reducción de 40% en stock out",
+                    description: "Automatización del proceso de reposición y alertas preventivas."
+                },
+                {
+                    industry: "Servicios Financieros",
+                    title: "Conciliación Bancaria",
+                    result: "100% conciliación automática",
+                    description: "Proceso diario que libera 4 horas/analista para análisis de discrepancias."
+                },
+                {
+                    industry: "Seguros",
+                    title: "Gestión de Siniestros",
+                    result: "Tiempo de respuesta -60%",
+                    description: "Clasificación automática de correos y extracción de datos de pólizas."
+                }
+            ],
+            testimonial: {
+                quote: "La implementación de RPA nos permitió escalar la operación sin aumentar el headcount administrativo, mejorando la calidad de vida del equipo.",
+                author: "Gerente de Operaciones",
+                role: "Retail Multinacional"
+            }
+        }
     },
 ];

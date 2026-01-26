@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { Button } from '@/components/ui'
 import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -30,6 +31,8 @@ const services = [
 ]
 
 export function Contact() {
+  const searchParams = useSearchParams()
+
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -42,6 +45,18 @@ export function Contact() {
   const [errors, setErrors] = useState<FormErrors>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+
+  // Preselect service and message from URL query parameter
+  useEffect(() => {
+    const serviceParam = searchParams.get('service')
+    const messageParam = searchParams.get('message')
+
+    setFormData(prev => ({
+      ...prev,
+      ...(serviceParam && services.includes(serviceParam) ? { service: serviceParam } : {}),
+      ...(messageParam ? { message: messageParam } : {})
+    }))
+  }, [searchParams])
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {}

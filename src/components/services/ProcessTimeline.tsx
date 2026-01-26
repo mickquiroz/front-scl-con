@@ -79,6 +79,24 @@ export function ProcessTimeline({ process, variant = 'default' }: ProcessTimelin
                                         "text-sm leading-relaxed",
                                         isHyper ? "text-slate-400" : isSap ? "text-slate-700" : "text-slate-600"
                                     )}>{step.description}</p>
+
+                                    {/* Deliverables & Duration (Hyperautomation) */}
+                                    {(step.deliverables || step.duration) && isHyper && (
+                                        <div className="mt-4 pt-4 border-t border-slate-800 text-xs">
+                                            {step.deliverables && (
+                                                <div className="mb-2">
+                                                    <span className="text-cyan-500 font-semibold block uppercase text-[10px] tracking-wider mb-0.5">Entregable:</span>
+                                                    <span className="text-slate-300">{step.deliverables}</span>
+                                                </div>
+                                            )}
+                                            {step.duration && (
+                                                <div>
+                                                    <span className="text-cyan-500 font-semibold block uppercase text-[10px] tracking-wider mb-0.5">Duración:</span>
+                                                    <span className="text-slate-300">{step.duration}</span>
+                                                </div>
+                                            )}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         ))}

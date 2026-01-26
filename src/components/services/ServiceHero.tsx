@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { ServiceHero as ServiceHeroType } from '@/config/services';
 import { cn } from '@/lib/utils';
 import { useScrollReveal } from '@/hooks/use-scroll-reveal';
@@ -12,6 +14,7 @@ interface ServiceHeroProps {
 }
 
 export function ServiceHero({ hero, variant = 'default' }: ServiceHeroProps) {
+    const router = useRouter();
     const isHyper = variant === 'hyperautomation';
     const isSap = variant === 'sap';
 
@@ -57,13 +60,26 @@ export function ServiceHero({ hero, variant = 'default' }: ServiceHeroProps) {
                     <p
                         ref={textRef}
                         className={cn(
-                            "text-lg md:text-xl mb-10 max-w-2xl leading-relaxed transition-all duration-700 ease-out delay-100",
+                            "text-lg md:text-xl mb-6 max-w-2xl leading-relaxed transition-all duration-700 ease-out delay-100",
                             isTextVisible ? motion.fadeUp.visible : motion.fadeUp.initial,
                             isHyper ? "text-cyan-100/80 font-light" : "text-slate-300"
                         )}
                     >
                         {hero.subheadline}
                     </p>
+
+                    {hero.targetAudience && (
+                        <div
+                            className={cn(
+                                "mb-10 text-sm font-medium tracking-wide uppercase transition-all duration-700 ease-out delay-150",
+                                isTextVisible ? motion.fadeUp.visible : motion.fadeUp.initial,
+                                isHyper ? "text-cyan-400" : "text-slate-400"
+                            )}
+                        >
+                            <span className="opacity-70 mr-2">Para:</span>
+                            {hero.targetAudience}
+                        </div>
+                    )}
                     <div
                         ref={btnRef}
                         className={cn(
@@ -71,27 +87,60 @@ export function ServiceHero({ hero, variant = 'default' }: ServiceHeroProps) {
                             isBtnVisible ? motion.fadeUp.visible : motion.fadeUp.initial
                         )}
                     >
-                        <button className={cn(
-                            "px-8 py-4 rounded-lg font-bold transition-all cursor-pointer relative overflow-hidden group",
-                            isHyper
-                                ? "bg-cyan-600 text-white hover:bg-cyan-500 hover:shadow-[0_0_30px_rgba(8,145,178,0.5)] border border-cyan-400/20"
-                                : isSap
-                                    ? "bg-white text-slate-900 hover:bg-slate-100 hover:shadow-xl hover:-translate-y-0.5"
-                                    : "bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-900/20"
-                        )}>
+                        <Link
+                            href={hero.ctaPrimaryHref || '#cta'}
+                            scroll={true}
+                            className={cn(
+                                "px-8 py-4 rounded-lg font-bold transition-all cursor-pointer relative overflow-hidden group flex items-center justify-center",
+                                isHyper
+                                    ? "bg-cyan-600 text-white hover:bg-cyan-500 hover:shadow-[0_0_30px_rgba(8,145,178,0.5)] border border-cyan-400/20"
+                                    : isSap
+                                        ? "bg-white text-slate-900 hover:bg-slate-100 hover:shadow-xl hover:-translate-y-0.5"
+                                        : "bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-900/20"
+                            )}
+                        >
                             <span className="relative z-10">{hero.ctaPrimary}</span>
                             {isHyper && <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-transparent opacity-0 group-hover:opacity-20 transition-opacity duration-300" />}
-                        </button>
+                        </Link>
 
                         {hero.ctaSecondary && (
-                            <button className={cn(
-                                "px-8 py-4 rounded-lg font-medium transition-all cursor-pointer",
-                                isHyper
-                                    ? "bg-slate-900/50 text-cyan-200 border border-cyan-500/30 hover:border-cyan-400/80 hover:bg-cyan-950/50 hover:text-white backdrop-blur-sm"
-                                    : "bg-transparent text-white border border-white/30 hover:bg-white/10"
-                            )}>
-                                {hero.ctaSecondary}
-                            </button>
+                            hero.ctaSecondaryHref === '#roi-calculator' ? (
+                                <button
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        // 1. Update URL (visual + history)
+                                        router.replace('#roi-calculator', { scroll: false });
+
+                                        // 2. Dispatch custom event for immediate reaction
+                                        // This bypasses Next.js sometimes swallowing hash changes on same-page
+                                        window.dispatchEvent(new Event('roi-modal-trigger'));
+
+                                        // 3. Fallback: also dispatch standard hashchange for good measure
+                                        window.dispatchEvent(new Event('hashchange'));
+                                    }}
+                                    className={cn(
+                                        "px-8 py-4 rounded-lg font-medium transition-all cursor-pointer",
+                                        isHyper
+                                            ? "bg-slate-900/50 text-cyan-200 border border-cyan-500/30 hover:border-cyan-400/80 hover:bg-cyan-950/50 hover:text-white backdrop-blur-sm"
+                                            : "bg-transparent text-white border border-white/30 hover:bg-white/10"
+                                    )}
+                                >
+                                    {hero.ctaSecondary}
+                                </button>
+                            ) : (
+                                <Link
+                                    href={hero.ctaSecondaryHref || '/contact'}
+                                    scroll={true}
+                                    className={cn(
+                                        "px-8 py-4 rounded-lg font-medium transition-all cursor-pointer flex items-center justify-center",
+                                        isHyper
+                                            ? "bg-slate-900/50 text-cyan-200 border border-cyan-500/30 hover:border-cyan-400/80 hover:bg-cyan-950/50 hover:text-white backdrop-blur-sm"
+                                            : "bg-transparent text-white border border-white/30 hover:bg-white/10"
+                                    )}
+                                >
+                                    {hero.ctaSecondary}
+                                </Link>
+                            )
                         )}
                     </div>
                 </div>

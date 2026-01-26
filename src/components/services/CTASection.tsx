@@ -16,7 +16,7 @@ export function CTASection({ variant = 'default' }: CTASectionProps) {
     const [ref, isVisible] = useScrollReveal<HTMLDivElement>(0.2);
 
     return (
-        <section className={cn(
+        <section id="cta" className={cn(
             "py-24 px-4 text-center transition-colors duration-500",
             isHyper ? "bg-slate-950 border-t border-slate-900" : isSap ? "bg-[#0a192f] border-t border-blue-900/30" : "bg-slate-900"
         )}>
@@ -39,6 +39,26 @@ export function CTASection({ variant = 'default' }: CTASectionProps) {
                 )}>
                     Conversemos sobre cómo nuestras soluciones pueden optimizar sus operaciones y generar valor real.
                 </p>
+
+                {/* Risk-free Reassurance (Hyperautomation) */}
+                {isHyper && (
+                    <div className="mb-8">
+                        <div className="inline-block px-4 py-1 rounded-full bg-cyan-950/30 border border-cyan-500/20 text-cyan-300 text-sm font-medium mb-6">
+                            Diagnóstico inicial sin costo
+                        </div>
+                        <ul className="flex flex-col md:flex-row justify-center gap-4 md:gap-8 text-sm text-slate-400 mb-2">
+                            <li className="flex items-center justify-center gap-2">
+                                <span className="text-cyan-500">✓</span> Evaluación → roadmap → quick wins
+                            </li>
+                            <li className="flex items-center justify-center gap-2">
+                                <span className="text-cyan-500">✓</span> Sin interrumpir operación
+                            </li>
+                            <li className="flex items-center justify-center gap-2">
+                                <span className="text-cyan-500">✓</span> Acompañamiento post-producción
+                            </li>
+                        </ul>
+                    </div>
+                )}
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Link href="/contact" passHref>
                         <button className={cn(
@@ -64,6 +84,6 @@ export function CTASection({ variant = 'default' }: CTASectionProps) {
                     </Link>
                 </div>
             </div>
-        </section>
+        </section >
     );
 }

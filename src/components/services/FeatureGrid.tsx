@@ -68,6 +68,29 @@ export function FeatureGrid({ highlights, variant = 'default' }: FeatureGridProp
                                 "leading-relaxed flex-grow",
                                 isHyper ? "text-slate-400 group-hover:text-slate-300" : isSap ? "text-slate-700" : "text-slate-600"
                             )}>{highlight.description}</p>
+
+                            {/* Use Case */}
+                            {highlight.useCase && (
+                                <div className={cn(
+                                    "mt-6 pt-4 border-t text-sm",
+                                    isHyper ? "border-slate-800 text-cyan-500/80" : "border-slate-100 text-slate-500"
+                                )}>
+                                    <span className="font-semibold block text-xs opacity-70 mb-1 uppercase tracking-wider">Uso común:</span>
+                                    {highlight.useCase}
+                                </div>
+                            )}
+
+                            {/* Badge */}
+                            {highlight.badge && (
+                                <div className={cn(
+                                    "absolute top-4 right-4 text-xs font-bold px-3 py-1 rounded-full border shadow-sm",
+                                    isHyper
+                                        ? "bg-cyan-950/50 text-cyan-400 border-cyan-500/20"
+                                        : "bg-blue-50 text-blue-600 border-blue-100"
+                                )}>
+                                    {highlight.badge}
+                                </div>
+                            )}
                         </div>
                     ))}
                 </div>

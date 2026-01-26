@@ -20,20 +20,44 @@ export function InternationalPresence({ variant = 'default' }: InternationalPres
                 )}>
                     Presencia Internacional
                 </h3>
-                <div className="flex flex-wrap justify-center gap-3">
-                    {countriesPresence.map((country) => (
-                        <span
-                            key={country}
-                            className={cn(
-                                "px-4 py-2 rounded-full text-sm font-medium transition-all cursor-default",
-                                isHyper
-                                    ? "bg-slate-800 text-cyan-400 border border-slate-700 hover:border-cyan-500/50 hover:shadow-[0_0_15px_rgba(34,211,238,0.2)]"
-                                    : "bg-white text-slate-700 border border-slate-200 shadow-sm"
-                            )}
-                        >
-                            {country}
-                        </span>
-                    ))}
+
+                <div className="flex flex-col gap-6 items-center">
+                    {/* Hubs Row */}
+                    <div className="flex items-center gap-4">
+                        <span className={cn("text-xs font-bold uppercase tracking-wider", isHyper ? "text-slate-600" : "text-slate-400")}>Hubs:</span>
+                        <div className="flex flex-wrap justify-center gap-3">
+                            {['Chile', 'Peru'].map((country) => (
+                                <span key={country} className={cn(
+                                    "px-4 py-1.5 rounded-full text-sm font-medium border cursor-default",
+                                    isHyper
+                                        ? "bg-slate-800 text-cyan-400 border-cyan-500/30"
+                                        : "bg-white text-slate-800 border-slate-300"
+                                )}>
+                                    {country}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Rest Coverage */}
+                    <div className="flex items-center gap-4">
+                        <span className={cn("text-xs font-bold uppercase tracking-wider", isHyper ? "text-slate-600" : "text-slate-400")}>Cobertura:</span>
+                        <div className="flex flex-wrap justify-center gap-3">
+                            {countriesPresence.filter(c => c !== 'Chile' && c !== 'Peru').map((country) => (
+                                <span
+                                    key={country}
+                                    className={cn(
+                                        "px-3 py-1 rounded-full text-xs font-medium transition-all cursor-default",
+                                        isHyper
+                                            ? "bg-slate-900 text-slate-400 border border-slate-800 hover:border-slate-700"
+                                            : "bg-white text-slate-600 border border-slate-200"
+                                    )}
+                                >
+                                    {country}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

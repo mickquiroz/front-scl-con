@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import { Suspense } from 'react';
 import { services } from '@/config/services';
 import { ServiceHero } from '@/components/services/ServiceHero';
 import { StatsStrip } from '@/components/services/StatsStrip';
@@ -6,6 +7,9 @@ import { FeatureGrid } from '@/components/services/FeatureGrid';
 import { ProcessTimeline } from '@/components/services/ProcessTimeline';
 import { CTASection } from '@/components/services/CTASection';
 import { InternationalPresence } from '@/components/services/InternationalPresence';
+import { SocialProofSection } from '@/components/services/SocialProofSection';
+
+import { ROICalculatorModal } from '@/components/services/ROICalculatorModal';
 
 export async function generateStaticParams() {
     return services.map((service) => ({
@@ -36,8 +40,21 @@ export default async function ServicePage({ params }: PageProps) {
           The brief asks for it in the context of Hyperautomation. 
           We place it after features for good flow. */}
             {variant === 'hyperautomation' && <InternationalPresence variant={variant} />}
+
+            {/* Social Proof for Hyperautomation */}
+            {variant === 'hyperautomation' && service.socialProof && (
+                <SocialProofSection data={service.socialProof} />
+            )}
+
             <ProcessTimeline process={service.process} variant={variant} />
             <CTASection variant={variant} />
+
+            {/* Lead Magnet: ROI Calculator Modal */}
+            {variant === 'hyperautomation' && (
+                <Suspense fallback={null}>
+                    <ROICalculatorModal />
+                </Suspense>
+            )}
         </main>
     );
 }

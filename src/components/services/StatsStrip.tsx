@@ -26,7 +26,8 @@ export function StatsStrip({ stats, variant = 'default' }: StatsStripProps) {
         )}>
             <div className="max-w-7xl mx-auto px-4">
                 <div className={cn(
-                    "grid grid-cols-1 md:grid-cols-3 gap-8 divide-y md:divide-y-0 md:divide-x",
+                    "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 divide-y md:divide-y-0 md:divide-x",
+                    stats.length === 3 ? "lg:grid-cols-3" : "",
                     isHyper ? "divide-slate-800" : isSap ? "divide-slate-200" : "divide-slate-100"
                 )}>
                     {stats.map((stat, index) => (
@@ -54,6 +55,14 @@ export function StatsStrip({ stats, variant = 'default' }: StatsStripProps) {
                             )}>
                                 {stat.label}
                             </div>
+                            {stat.sublabel && (
+                                <div className={cn(
+                                    "text-xs mt-1",
+                                    isHyper ? "text-slate-500" : "text-slate-400"
+                                )}>
+                                    {stat.sublabel}
+                                </div>
+                            )}
                         </div>
                     ))}
                 </div>

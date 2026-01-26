@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import {
   Header,
   Hero,
@@ -22,7 +23,9 @@ export default function Home() {
         <History />
         <Team />
         <WhyChooseUs />
-        <Contact />
+        <Suspense fallback={<div className="section-padding bg-neutral-50" />}>
+          <Contact />
+        </Suspense>
       </main>
       <Footer />
       <WhatsAppButton
