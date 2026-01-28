@@ -17,8 +17,7 @@ export function CTASection({ variant = 'default' }: CTASectionProps) {
 
     return (
         <section id="cta" className={cn(
-            "py-24 px-4 text-center transition-colors duration-500",
-            isHyper ? "bg-slate-950 border-t border-slate-900" : isSap ? "bg-[#0a192f] border-t border-blue-900/30" : "bg-slate-900"
+            "py-24 px-4 text-center transition-colors duration-500 bg-primary"
         )}>
             <div
                 ref={ref}
@@ -28,14 +27,12 @@ export function CTASection({ variant = 'default' }: CTASectionProps) {
                 )}
             >
                 <h2 className={cn(
-                    "text-3xl md:text-4xl font-bold mb-6",
-                    isHyper ? "text-transparent bg-clip-text bg-gradient-to-r from-cyan-200 to-white" : "text-white"
+                    "text-3xl md:text-4xl font-bold mb-6 text-primary-foreground"
                 )}>
                     ¿Listo para transformar su negocio?
                 </h2>
                 <p className={cn(
-                    "text-lg mb-10 max-w-2xl mx-auto",
-                    isHyper ? "text-cyan-100/70" : "text-slate-300"
+                    "text-lg mb-10 max-w-2xl mx-auto text-primary-foreground/90"
                 )}>
                     Conversemos sobre cómo nuestras soluciones pueden optimizar sus operaciones y generar valor real.
                 </p>
@@ -43,18 +40,18 @@ export function CTASection({ variant = 'default' }: CTASectionProps) {
                 {/* Risk-free Reassurance (Hyperautomation) */}
                 {isHyper && (
                     <div className="mb-8">
-                        <div className="inline-block px-4 py-1 rounded-full bg-cyan-950/30 border border-cyan-500/20 text-cyan-300 text-sm font-medium mb-6">
+                        <div className="inline-block px-4 py-1 rounded-full bg-white/10 border border-white/20 text-white text-sm font-medium mb-6">
                             Diagnóstico inicial sin costo
                         </div>
-                        <ul className="flex flex-col md:flex-row justify-center gap-4 md:gap-8 text-sm text-slate-400 mb-2">
+                        <ul className="flex flex-col md:flex-row justify-center gap-4 md:gap-8 text-sm text-primary-foreground/80 mb-2">
                             <li className="flex items-center justify-center gap-2">
-                                <span className="text-cyan-500">✓</span> Evaluación → roadmap → quick wins
+                                <span className="text-cta">✓</span> Evaluación → roadmap → quick wins
                             </li>
                             <li className="flex items-center justify-center gap-2">
-                                <span className="text-cyan-500">✓</span> Sin interrumpir operación
+                                <span className="text-cta">✓</span> Sin interrumpir operación
                             </li>
                             <li className="flex items-center justify-center gap-2">
-                                <span className="text-cyan-500">✓</span> Acompañamiento post-producción
+                                <span className="text-cta">✓</span> Acompañamiento post-producción
                             </li>
                         </ul>
                     </div>
@@ -62,22 +59,14 @@ export function CTASection({ variant = 'default' }: CTASectionProps) {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Link href="/contact" passHref>
                         <button className={cn(
-                            "px-8 py-4 rounded-lg font-bold transition shadow-lg cursor-pointer",
-                            isHyper
-                                ? "bg-cyan-600 text-white hover:bg-cyan-500 hover:shadow-[0_0_20px_rgba(34,211,238,0.4)]"
-                                : isSap
-                                    ? "bg-white text-[#0a192f] hover:bg-slate-100 hover:shadow-xl hover:-translate-y-0.5"
-                                    : "bg-blue-600 text-white hover:bg-blue-700 shadow-blue-900/40"
+                            "px-8 py-4 rounded-lg font-bold transition shadow-lg cursor-pointer shadow-button hover:shadow-button-hover bg-cta text-cta-foreground hover:-translate-y-0.5"
                         )}>
                             Iniciar Conversación
                         </button>
                     </Link>
                     <Link href="/services" passHref>
                         <button className={cn(
-                            "px-8 py-4 border rounded-lg font-medium transition cursor-pointer",
-                            isHyper
-                                ? "bg-slate-900/50 border-cyan-500/30 text-cyan-200 hover:bg-cyan-950/50 hover:border-cyan-400 group"
-                                : "bg-transparent border-slate-700 text-white hover:bg-slate-800"
+                            "px-8 py-4 border rounded-lg font-medium transition cursor-pointer bg-transparent border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"
                         )}>
                             Explorar Otros Servicios
                         </button>

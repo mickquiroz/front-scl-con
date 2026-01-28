@@ -11,6 +11,8 @@ import {
   Footer,
 } from '@/components/sections'
 import { WhatsAppButton } from '@/components/ui'
+import { TrustedBySection } from '@/components/services/TrustedBySection'
+import { trustedCompanies } from '@/config/services'
 
 export default function Home() {
   return (
@@ -23,6 +25,7 @@ export default function Home() {
         <History />
         <Team />
         <WhyChooseUs />
+        <TrustedBySection companies={trustedCompanies} />
         <Suspense fallback={<div className="section-padding bg-neutral-50" />}>
           <Contact />
         </Suspense>
