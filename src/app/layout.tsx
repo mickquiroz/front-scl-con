@@ -65,7 +65,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={`scroll-smooth ${inter.variable}`}>
+    <html lang="es" className={`scroll-smooth ${inter.variable}`} data-scroll-behavior="smooth">
       <body className="antialiased">{children}</body>
     </html>
   );

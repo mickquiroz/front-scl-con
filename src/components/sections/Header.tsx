@@ -70,12 +70,9 @@ export function Header() {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2">
-              <div className="w-10 h-10 bg-primary-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">SCL</span>
+              <div className="h-10 relative aspect-[3/1]">
+                <img src="/images/SCL/logoscl.svg" alt="SCL Consultores" className="h-full w-auto object-contain" />
               </div>
-              <span className="text-xl font-bold text-primary-500 hidden sm:block">
-                Consultores
-              </span>
             </Link>
 
             {/* Desktop Navigation */}
@@ -84,22 +81,24 @@ export function Header() {
                 link.label === 'Servicios' ? (
                   <ServicesDropdown key={link.href} />
                 ) : (
-                  <a
+                  <Link
                     key={link.href}
-                    href={link.href}
+                    href={link.href.startsWith('#') ? `/${link.href}` : link.href}
                     className="nav-link"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 )
               ))}
             </div>
 
             {/* CTA Button */}
             <div className="hidden lg:block">
-              <Button variant="primary" size="sm">
-                Iniciar Proyecto
-              </Button>
+              <Link href="/contact">
+                <Button variant="primary" size="sm">
+                  Iniciar Proyecto
+                </Button>
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}
@@ -164,20 +163,22 @@ export function Header() {
                     </div>
                   </div>
                 ) : (
-                  <a
+                  <Link
                     key={link.href}
-                    href={link.href}
+                    href={link.href.startsWith('#') ? `/${link.href}` : link.href}
                     className="py-3 px-4 text-neutral-700 hover:bg-primary-50 hover:text-primary-500 rounded-lg transition-colors"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 )
               ))}
               <div className="mt-4 pt-4 border-t border-neutral-200">
-                <Button variant="primary" className="w-full">
-                  Iniciar Proyecto
-                </Button>
+                <Link href="/contact" className="w-full">
+                  <Button variant="primary" className="w-full">
+                    Iniciar Proyecto
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>

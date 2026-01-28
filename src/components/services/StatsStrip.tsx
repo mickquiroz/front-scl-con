@@ -21,13 +21,12 @@ export function StatsStrip({ stats, variant = 'default' }: StatsStripProps) {
 
     return (
         <section ref={ref} className={cn(
-            "py-12 border-b transition-colors duration-300",
-            isHyper ? "bg-slate-950 border-slate-800" : isSap ? "bg-white border-slate-200" : "bg-white border-slate-100"
+            "py-12 border-b transition-colors duration-300 bg-background border-border"
         )}>
             <div className="max-w-7xl mx-auto px-4">
                 <div className={cn(
-                    "grid grid-cols-1 md:grid-cols-3 gap-8 divide-y md:divide-y-0 md:divide-x",
-                    isHyper ? "divide-slate-800" : isSap ? "divide-slate-200" : "divide-slate-100"
+                    "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 divide-y md:divide-y-0 md:divide-x divide-border",
+                    stats.length === 3 ? "lg:grid-cols-3" : ""
                 )}>
                     {stats.map((stat, index) => (
                         <div
@@ -41,19 +40,25 @@ export function StatsStrip({ stats, variant = 'default' }: StatsStripProps) {
                             <div className={cn(
                                 "text-4xl md:text-5xl font-bold mb-2 tracking-tight flex justify-center",
                                 isHyper
-                                    ? "text-cyan-400 drop-shadow-[0_0_10px_rgba(34,211,238,0.3)]"
+                                    ? "text-primary drop-shadow-sm"
                                     : isSap
-                                        ? "text-[#0a192f]"
-                                        : "text-blue-600"
+                                        ? "text-primary-800"
+                                        : "text-primary"
                             )}>
                                 <Counter value={stat.value} />
                             </div>
                             <div className={cn(
-                                "font-medium text-sm md:text-base uppercase tracking-wide",
-                                isHyper ? "text-slate-400" : isSap ? "text-slate-500 font-semibold" : "text-slate-600"
+                                "font-medium text-sm md:text-base uppercase tracking-wide text-muted-foreground"
                             )}>
                                 {stat.label}
                             </div>
+                            {stat.sublabel && (
+                                <div className={cn(
+                                    "text-xs mt-1 text-muted-foreground/80"
+                                )}>
+                                    {stat.sublabel}
+                                </div>
+                            )}
                         </div>
                     ))}
                 </div>

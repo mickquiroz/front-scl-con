@@ -34,19 +34,18 @@ export function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-dark text-white">
+    <footer className="bg-slate-50 text-slate-600 border-t border-slate-200">
       {/* Main footer */}
       <div className="layout-wrapper py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {/* Company info */}
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 bg-primary-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">SCL</span>
+              <div className="h-10 relative aspect-[3/1]">
+                <img src="/images/SCL/logoscl.svg" alt="SCL Consultores" className="h-full w-auto object-contain" />
               </div>
-              <span className="text-xl font-bold">Consultores</span>
             </Link>
-            <p className="text-neutral-400 text-sm leading-relaxed mb-6">
+            <p className="text-slate-500 text-sm leading-relaxed mb-6">
               Consultora de tecnología especializada en outsourcing TI, consultoría SAP
               y transformación digital. Conectamos empresas con profesionales
               certificados y entregamos proyectos con 98% de tasa de éxito.
@@ -60,7 +59,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary-500 transition-colors"
+                  className="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center text-slate-600 hover:bg-primary-500 hover:text-white transition-colors"
                 >
                   <social.icon className="w-5 h-5" />
                 </a>
@@ -70,13 +69,13 @@ export function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="font-bold text-lg mb-6">Servicios</h4>
+            <h4 className="font-bold text-slate-900 text-lg mb-6">Servicios</h4>
             <ul className="space-y-3">
               {serviceLinks.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-neutral-400 hover:text-white transition-colors text-sm"
+                    className="text-slate-500 hover:text-primary-600 transition-colors text-sm"
                   >
                     {link.label}
                   </a>
@@ -87,13 +86,13 @@ export function Footer() {
 
           {/* Company */}
           <div>
-            <h4 className="font-bold text-lg mb-6">Empresa</h4>
+            <h4 className="font-bold text-slate-900 text-lg mb-6">Empresa</h4>
             <ul className="space-y-3">
               {companyLinks.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-neutral-400 hover:text-white transition-colors text-sm"
+                    className="text-slate-500 hover:text-primary-600 transition-colors text-sm"
                   >
                     {link.label}
                   </a>
@@ -104,12 +103,12 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="font-bold text-lg mb-6">Contacto</h4>
-            <ul className="space-y-3 text-sm text-neutral-400">
+            <h4 className="font-bold text-slate-900 text-lg mb-6">Contacto</h4>
+            <ul className="space-y-3 text-sm text-slate-500">
               <li>
                 <a
                   href="mailto:contacto@sclconsultores.com"
-                  className="hover:text-white transition-colors"
+                  className="hover:text-primary-600 transition-colors"
                 >
                   contacto@sclconsultores.com
                 </a>
@@ -117,7 +116,7 @@ export function Footer() {
               <li>
                 <a
                   href="tel:+56912345678"
-                  className="hover:text-white transition-colors"
+                  className="hover:text-primary-600 transition-colors"
                 >
                   +56 9 1234 5678
                 </a>
@@ -130,23 +129,23 @@ export function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-white/10">
+      <div className="border-t border-slate-200 bg-slate-100/50">
         <div className="layout-wrapper py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-neutral-400 text-sm text-center md:text-left">
+            <p className="text-slate-500 text-sm text-center md:text-left">
               &copy; {currentYear} SCL Consultores. Todos los derechos reservados.
             </p>
-            <div className="flex items-center gap-6 text-sm text-neutral-400">
-              <a href="#" className="hover:text-white transition-colors">
+            <div className="flex items-center gap-6 text-sm text-slate-500">
+              <a href="#" className="hover:text-primary-600 transition-colors">
                 Política de Privacidad
               </a>
-              <a href="#" className="hover:text-white transition-colors">
+              <a href="#" className="hover:text-primary-600 transition-colors">
                 Términos de Servicio
               </a>
               <button
                 onClick={handleScrollToTop}
                 aria-label="Volver arriba"
-                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary-500 transition-colors"
+                className="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center hover:bg-primary-500 hover:text-white transition-colors"
               >
                 <ArrowUp className="w-5 h-5" />
               </button>

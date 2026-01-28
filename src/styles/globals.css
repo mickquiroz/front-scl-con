@@ -1,13 +1,43 @@
 @import "tailwindcss";
-/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap'); */
-
 
 /* ============================================
    SCL CONSULTORES - DESIGN TOKENS (Tailwind v4)
    ============================================ */
 
 @theme {
-  /* Colors - Primary (Blue) */
+  /* Semantic Colors Mapped to CSS Variables */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-cta: var(--cta);
+  --color-cta-foreground: var(--cta-foreground);
+
+  /* Legacy Color Scales (Preserved for compatibility) */
   --color-primary-50: #E6F4F9;
   --color-primary-100: #B3E0F0;
   --color-primary-200: #80CCE6;
@@ -19,7 +49,6 @@
   --color-primary-800: #00435C;
   --color-primary-900: #002D3F;
 
-  /* Colors - Accent (Orange) */
   --color-accent-50: #FFF3E6;
   --color-accent-100: #FFDDB3;
   --color-accent-200: #FFC780;
@@ -31,7 +60,6 @@
   --color-accent-800: #B35A00;
   --color-accent-900: #994C00;
 
-  /* Colors - Neutral */
   --color-neutral-50: #F9FAFB;
   --color-neutral-100: #F3F4F6;
   --color-neutral-200: #E5E7EB;
@@ -43,11 +71,7 @@
   --color-neutral-800: #1F2937;
   --color-neutral-900: #111827;
 
-  /* Dark Blue for Footer */
-  --color-dark: #1A365D;
-
-  /* Font Family 
-  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; */
+  /* Font Family */
   --font-sans: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   /* Shadows */
@@ -60,6 +84,7 @@
   /* Animation */
   --animate-fade-in: fadeIn 0.6s ease-out forwards;
   --animate-slide-up: slideUp 0.6s ease-out forwards;
+  --animate-marquee: marquee 40s linear infinite;
 
   /* Container */
   --container-max: 1440px;
@@ -87,13 +112,105 @@
   }
 }
 
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 /* ============================================
-   BASE STYLES
+   BASE STYLES & SEMANTIC VARIABLES
    ============================================ */
 
 @layer base {
+  :root {
+    /* LIGHT MODE (Default) - Based on SCL Brand Refresh */
+    --background: #F7F7F4;
+    --foreground: #1F2432;
+    /* Primary Text */
+
+    --card: #FFFFFF;
+    --card-foreground: #1F2432;
+
+    --popover: #FFFFFF;
+    --popover-foreground: #1F2432;
+
+    --primary: #0583AF;
+    /* Brand Teal */
+    --primary-foreground: #FFFFFF;
+
+    --secondary: #EEF0E8;
+    /* Secondary BG / Muted Green-White */
+    --secondary-foreground: #364F56;
+    /* Secondary Text */
+
+    --muted: #EEF0E8;
+    --muted-foreground: #364F56;
+
+    --accent: #1E98C3;
+    /* Brand Cyan */
+    --accent-foreground: #FFFFFF;
+
+    --destructive: #EF4444;
+    --destructive-foreground: #FFFFFF;
+
+    --border: #E3E0CC;
+    --input: #E3E0CC;
+    --ring: #0583AF;
+
+    --cta: #F1872B;
+    /* Brand Orange */
+    --cta-foreground: #FFFFFF;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* DARK MODE (Legacy/Dark Option) */
+    --background: #020617;
+    /* slate-950 */
+    --foreground: #F8FAFC;
+    /* slate-50 */
+
+    --card: #0F172A;
+    /* slate-900 */
+    --card-foreground: #F8FAFC;
+
+    --popover: #0F172A;
+    --popover-foreground: #F8FAFC;
+
+    --primary: #0583AF;
+    --primary-foreground: #FFFFFF;
+
+    --secondary: #1E293B;
+    /* slate-800 */
+    --secondary-foreground: #F8FAFC;
+
+    --muted: #1E293B;
+    --muted-foreground: #94A3B8;
+    /* slate-400 */
+
+    --accent: #1E98C3;
+    --accent-foreground: #FFFFFF;
+
+    --destructive: #7F1D1D;
+    --destructive-foreground: #F8FAFC;
+
+    --border: #1E293B;
+    /* slate-800 */
+    --input: #1E293B;
+    --ring: #1E98C3;
+
+    --cta: #F1872B;
+    --cta-foreground: #FFFFFF;
+  }
+
   * {
-    @apply border-neutral-200;
+    @apply border-border;
   }
 
   html {
@@ -103,12 +220,12 @@
   }
 
   body {
-    @apply bg-white text-neutral-800 font-sans;
+    @apply bg-background text-foreground font-sans transition-colors duration-300;
   }
 
   /* Focus States */
   :focus-visible {
-    @apply outline-none ring-2 ring-primary-500 ring-offset-2;
+    @apply outline-none ring-2 ring-ring ring-offset-2;
   }
 }
 
@@ -208,14 +325,19 @@
 
 @layer components {
 
+  /* Design System Cards & Surfaces */
+  .card-base {
+    @apply bg-card text-card-foreground border border-border shadow-sm rounded-lg;
+  }
+
   /* Navigation Link */
   .nav-link {
-    @apply relative text-base font-medium text-neutral-700 hover:text-primary-500 transition-colors duration-300;
+    @apply relative text-base font-medium text-muted-foreground hover:text-primary transition-colors duration-300;
   }
 
   .nav-link::after {
     content: '';
-    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-accent-500 transition-all duration-300;
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-accent transition-all duration-300;
   }
 
   .nav-link:hover::after {
@@ -223,7 +345,7 @@
   }
 
   .nav-link-active {
-    @apply text-primary-500;
+    @apply text-primary;
   }
 
   .nav-link-active::after {
